@@ -5,8 +5,6 @@ import { createGlobalStyle } from "styled-components";
 
 import { Home } from './scenes';
 
-import { PriceProvider } from './context/PriceProvider';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -25,20 +23,16 @@ class App extends Component {
     return (
       <Router>
 
-          <PriceProvider>
+        <Layout>
 
-            <Layout>
+          <Header />
 
-              <Header />
+          <Route path="/" exact component={Home} />
 
-              <Route path="/" exact component={Home} />
+          <Footer />
 
-              <Footer />
-
-              <GlobalStyle />
-            </Layout>
-
-          </PriceProvider>
+          <GlobalStyle />
+        </Layout>
 
       </Router>
     );

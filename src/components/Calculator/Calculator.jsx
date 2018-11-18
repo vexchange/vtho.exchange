@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Row, Col, Input, Divider, Icon } from 'antd';
+import { injectIntl } from 'react-intl';
 import { FormattedNumber } from 'react-intl';
 import styled from 'styled-components';
 import _ from 'lodash';
@@ -24,13 +25,16 @@ const Amount = styled.div`
     font-size: 14px;
     margin-left: 5px;
   }
+
+  @media all and (max-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 const Footer = styled.div`
   display: flex;
 
   i {
-    padding-top: 4px;
     margin-right: 4px;
   }
 `;
@@ -86,12 +90,14 @@ class Calculator extends Component {
   }, 500);
 
   render() {
+    const { intl } = this.props;
     const { vet, vtho } = this.state;
 
     return (
-      <Card title="Calculator">
+      <Card title={intl.formatMessage({ id: "calculator.label" })}>
         <Row gutter={30}>
-          <Col span={12}>
+          <Col sm={24} md={12} lg={12} xl={12}>
+            
             <StyledInput
               type="number"
               size="large"
@@ -103,7 +109,7 @@ class Calculator extends Component {
               <small>VTHO</small>
             </Amount>
           </Col>
-          <Col span={12}>
+          <Col sm={24} md={12} lg={12} xl={12}>
             <StyledInput
               type="number"
               size="large"
@@ -120,7 +126,7 @@ class Calculator extends Component {
         <Footer>
           <Icon type="thunderbolt" />
           <small>
-            This calculator pulls prices directly from the smart contract, however, another user may enter an order before you. As such, the end price may differ from what the calculator is displaying
+            { intl.formatMessage({ id: 'calculator.notice' })}
           </small>
         </Footer>
       </Card>
@@ -128,4 +134,4 @@ class Calculator extends Component {
   }
 }
 
-export default Calculator;
+export default injectIntl(Calculator);

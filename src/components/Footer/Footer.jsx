@@ -34,6 +34,11 @@ const Links = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media all and (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const Footer = () => {

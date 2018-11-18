@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
+import { injectIntl } from 'react-intl';
 import _ from 'lodash';
 
 import CustomCard from '../CustomCard';
@@ -63,21 +64,22 @@ class Prices extends Component {
 
   render() {
     const { tickers } = this.state;
+    const { intl } = this.props;
 
     return (
         <Row type="flex" justify="space-between" gutter={30}>
-          <Col span={12}>
+          <Col sm={24} md={12} lg={12} xl={12}>
 
-            <CustomCard title="Vexchange Price">
+            <CustomCard title={`Vexchange ${intl.formatMessage({ id: 'price' })}`}>
               <Row type="flex" justify="space-between" gutter={30}>
-                <Col>
-                  <Label>VET Price</Label>
+                <Col span={12}>
+                  <Label>VET { intl.formatMessage({ id: 'price' }) }</Label>
                   <Price>
                     { Prices.format(this.getVETPrice()) }
                   </Price>
                 </Col>
-                <Col>
-                  <Label>VTHO Price</Label>
+                <Col span={12}>
+                  <Label>VTHO { intl.formatMessage({ id: 'price' }) }</Label>
                   <Price>
                     { Prices.format(this.getVTHOPrice()) }
                   </Price>
@@ -86,13 +88,13 @@ class Prices extends Component {
             </CustomCard>
 
           </Col>
-          <Col span={12}>
+          <Col sm={24} md={12} lg={12} xl={12}>
 
-            <CustomCard title="Coinmarketcap Price">
+            <CustomCard title={`Coinmarketcap ${intl.formatMessage({ id: 'price' })}`}>
               <Row type="flex" justify="space-between" gutter={30}>
                 <Col>
                   <div>
-                    <Label>VET Price</Label>
+                    <Label>VET { intl.formatMessage({ id: 'price' }) }</Label>
                   </div>
                   <Price>
                     { Prices.conversion(tickers.vet, 100) }
@@ -100,7 +102,7 @@ class Prices extends Component {
                 </Col>
                 <Col>
                   <div>
-                    <Label>VTHO Price</Label>
+                    <Label>VTHO { intl.formatMessage({ id: 'price' }) }</Label>
                   </div>
                   <Price>
                     { Prices.conversion(tickers.vtho, 100) }
@@ -115,4 +117,4 @@ class Prices extends Component {
   }
 }
 
-export default Prices;
+export default injectIntl(Prices);

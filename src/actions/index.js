@@ -52,5 +52,12 @@ export const calculateVET = (val) => {
   };
 };
 
+export const changeLanguage = (val) => {
+  return {
+    type: 'CHANGE_LOCALE',
+    payload: val,
+  }
+};
+
 
 

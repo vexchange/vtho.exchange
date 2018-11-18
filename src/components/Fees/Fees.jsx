@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { injectIntl } from 'react-intl';
 import { Card, Row, Col } from 'antd';
 import styled from 'styled-components';
 
@@ -19,34 +20,36 @@ const Small = styled.small`
 class Fees extends Component {
   render() {
 
-    const { vet, vtho } = this.props;
+    const { vet, vtho, intl } = this.props;
 
     return (
-      <Card title="Gas Fees" extra="The smart contract charges a 2% fee">
+      <Card
+        title={`Gas ${intl.formatMessage({ id: 'fees.label'})}`}
+        extra={intl.formatMessage({ id: 'fees.subtitle' })}>
         <Row type="flex" justify="space-between" gutter={30}>
-          <Col>
-            <Label>Minimum VET Deposit</Label>
+          <Col span={12}>
+            <Label>{ intl.formatMessage({ id: 'fees.minimumVET' }) }</Label>
             <Fee>
               { vet.deposit }
               <Small> vet</Small>
             </Fee>
           </Col>
-          <Col>
-            <Label>VET Gas Fees</Label>
+          <Col span={12}>
+            <Label>VET Gas { intl.formatMessage({ id: 'fees.label' }) }</Label>
             <Fee>
               { vet.gas }
               <Small> vet</Small>
             </Fee>
           </Col>
-          <Col>
-            <Label>Minimum VTHO Deposit</Label>
+          <Col span={12}>
+            <Label>{ intl.formatMessage({ id: 'fees.minimumVTHO' }) }</Label>
             <Fee>
               { vtho.deposit }
               <Small> vtho</Small>
             </Fee>
           </Col>
-          <Col>
-            <Label>VTHO Gas Fees</Label>
+          <Col span={12}>
+            <Label>VTHO Gas { intl.formatMessage({ id: 'fees.label' }) }</Label>
             <Fee>
               { vtho.gas }
               <Small> vtho</Small>
@@ -58,4 +61,4 @@ class Fees extends Component {
   }
 }
 
-export default Fees;
+export default injectIntl(Fees);

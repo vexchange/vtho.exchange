@@ -8,11 +8,14 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import promiseMiddleware from 'redux-promise-middleware'
 import { createLogger } from 'redux-logger';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { addLocaleData } from 'react-intl';
+import browserLocale from 'browser-locale';
 
 import en from 'react-intl/locale-data/en';
+import zh from 'react-intl/locale-data/zh';
 
 import createRootReducer from './reducers';
+import LocaleContainer from './containers/LocaleContainer';
 
 import 'normalize.css';
 import "antd/dist/antd.css";
@@ -21,6 +24,9 @@ import './index.css';
 import App from './App';
 
 const history = createBrowserHistory();
+
+const locale = browserLocale();
+const localeWithoutRegionCode = locale.toLowerCase().split(/[_-]+/)[0];
 
 const middleWare = applyMiddleware(
   promiseMiddleware(),
@@ -35,16 +41,16 @@ const store = createStore(
   composeEnhancers(middleWare),
 );
 
-addLocaleData([...en]);
+addLocaleData([...en, ...zh]);
 
 ReactDOM.render(
-  <IntlProvider locale="en">
-    <Provider store={store}>
+  <Provider store={store}>
+    <LocaleContainer locale={localeWithoutRegionCode}>
       <ConnectedRouter history={history}>
         <App />
       </ConnectedRouter>
-    </Provider>
-  </IntlProvider>,
+    </LocaleContainer>
+  </Provider>,
   document.getElementById('root')
 );
 
