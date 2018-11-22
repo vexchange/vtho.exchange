@@ -12,6 +12,11 @@ const Wrapper = styled.div`
 
 const Links = styled.div`
   padding: 8px 0;
+
+  @media all and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Link = styled.a`
@@ -23,6 +28,8 @@ const Link = styled.a`
 
   &:first-of-type {
     margin-right: 24px;
+  }
+
   }
 `;
 

@@ -67,18 +67,19 @@ class Prices extends Component {
     const { intl } = this.props;
 
     return (
-        <Row type="flex" justify="space-between" gutter={30}>
+      <div>
+        <Row gutter={30}>
           <Col sm={24} md={12} lg={12} xl={12}>
 
             <CustomCard title={`Vexchange ${intl.formatMessage({ id: 'price' })}`}>
               <Row type="flex" justify="space-between" gutter={30}>
-                <Col span={12}>
+                <Col>
                   <Label>VET { intl.formatMessage({ id: 'price' }) }</Label>
                   <Price>
                     { Prices.format(this.getVETPrice()) }
                   </Price>
                 </Col>
-                <Col span={12}>
+                <Col>
                   <Label>VTHO { intl.formatMessage({ id: 'price' }) }</Label>
                   <Price>
                     { Prices.format(this.getVTHOPrice()) }
@@ -113,6 +114,7 @@ class Prices extends Component {
 
           </Col>
         </Row>
+      </div>
     );
   }
 }

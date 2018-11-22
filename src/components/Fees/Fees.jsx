@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { injectIntl } from 'react-intl';
-import { Card, Row, Col } from 'antd';
+import { Card } from 'antd';
 import styled from 'styled-components';
 
 const Label = styled.small`
@@ -17,6 +17,24 @@ const Small = styled.small`
   font-size: 1.5rem;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @media all and (max-width: 768px) {
+    justify-content: space-around;
+
+    > div {
+      text-align: center;
+
+      &:nth-of-type(1) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+`;
+
 class Fees extends Component {
   render() {
 
@@ -26,36 +44,36 @@ class Fees extends Component {
       <Card
         title={`Gas ${intl.formatMessage({ id: 'fees.label'})}`}
         extra={intl.formatMessage({ id: 'fees.subtitle' })}>
-        <Row type="flex" justify="space-between" gutter={30}>
-          <Col span={12}>
+        <Wrapper>
+          <div>
             <Label>{ intl.formatMessage({ id: 'fees.minimumVET' }) }</Label>
             <Fee>
               { vet.deposit }
               <Small> vet</Small>
             </Fee>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div>
             <Label>VET Gas { intl.formatMessage({ id: 'fees.label' }) }</Label>
             <Fee>
               { vet.gas }
               <Small> vet</Small>
             </Fee>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div>
             <Label>{ intl.formatMessage({ id: 'fees.minimumVTHO' }) }</Label>
             <Fee>
               { vtho.deposit }
               <Small> vtho</Small>
             </Fee>
-          </Col>
-          <Col span={12}>
+          </div>
+          <div>
             <Label>VTHO Gas { intl.formatMessage({ id: 'fees.label' }) }</Label>
             <Fee>
               { vtho.gas }
               <Small> vtho</Small>
             </Fee>
-          </Col>
-        </Row>
+          </div>
+        </Wrapper>
       </Card>
     );
   }

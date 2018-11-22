@@ -12,6 +12,11 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+
+  @media all and (max-width: 768px) {
+    order: 0;
+    margin-bottom: 40px;
+  }
 `;
 
 const Canvas = styled.canvas`
