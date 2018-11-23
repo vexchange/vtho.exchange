@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Layout } from 'antd';
 import axios from 'axios';
 
@@ -53,21 +53,23 @@ class Home extends Component {
 
   render() {
     return (
-      <Content>
-        <BalancesContainer />
+      <Fragment>
+        <Content>
+          <BalancesContainer />
 
-        <Container>
-          <Info />
+          <Container>
+            <Info />
 
-          <PricesContainer />
+            <PricesContainer />
 
-          <FeesContainer />
+            <FeesContainer />
 
-          <CalculatorContainer />
+            <CalculatorContainer />
 
-        </Container>
+          </Container>
 
-      </Content>
+        </Content>
+      </Fragment>
     );
   }
 }

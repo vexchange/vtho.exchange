@@ -17,7 +17,6 @@ class Locale extends Component {
   }
 
   componentWillReceiveProps({ locale }) {
-    console.log(locale)
     if (this.props.locale !== locale) {
       this.setState({ locale });
     }
