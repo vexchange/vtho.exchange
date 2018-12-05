@@ -91,7 +91,7 @@ class Prices extends Component {
           </Col>
           <Col sm={24} md={12} lg={12} xl={12}>
 
-            <CustomCard title={`Coinmarketcap ${intl.formatMessage({ id: 'price' })}`}>
+            <CustomCard title={`Exchange ${intl.formatMessage({ id: 'price' })}`}>
               <Row type="flex" justify="space-between" gutter={30}>
                 <Col>
                   <div>

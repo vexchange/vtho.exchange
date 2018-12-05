@@ -10,13 +10,11 @@ export default function tickers(state = initialState, action) {
     case 'FETCH_TICKERS_PENDING':
       return { ...state, ...payload };
     case 'FETCH_TICKERS_FULFILLED':
-    const { data: { data: vet } } = payload[1];
-    const { data: { data: vtho } } = payload[0];
 
       return { 
         ...state,
-        vet: vet.quotes.USD.price,
-        vtho: vtho.quotes.USD.price,
+        vet: payload[1].USD,
+        vtho: payload[0].USD,
       };
     default:
       return state;
