@@ -1,6 +1,6 @@
 const initialState = {
-  vet: 0,
-  vtho: 0,
+  VET: 0,
+  VTHO: 0,
 };
 
 export default function calculations(state = initialState, action) {

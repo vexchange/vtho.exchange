@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 import { message, Tooltip } from 'antd';
 import ClipboardJS from 'clipboard';
 import styled from 'styled-components';
+import { isEqual } from 'lodash';
 
 const success = () => {
   message.success('Address Copied!');
@@ -40,9 +41,18 @@ class QR extends Component {
     };
 
     this.ref = React.createRef();
+    this.setQR = this.setQR.bind(this);
   }
 
-  componentDidMount() {
+  componentWillReceiveProps({ token }) {
+    if (!isEqual(this.props.token, token)) {
+      this.setState({ address: token.address }, () => {
+        this.setQR();
+      });
+    }
+  }
+
+  setQR() {
     const canvas = this.ref.current;
     const clipboard = new ClipboardJS(canvas);
     const { address } = this.state;

@@ -1,4 +1,5 @@
 import React from 'react';
+import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
@@ -29,6 +30,7 @@ const locale = browserLocale();
 const localeWithoutRegionCode = locale.toLowerCase().split(/[_-]+/)[0];
 
 const middleWare = applyMiddleware(
+  thunk,
   promiseMiddleware(),
   createLogger({ collapsed: true }),
   routerMiddleware(history),

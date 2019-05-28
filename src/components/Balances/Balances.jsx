@@ -76,10 +76,10 @@ class Balances extends Component {
           <Links>
             <Link href="https://explore.veforge.com/accounts/0x534BD48d7CfB0602EA3708cfdDacFeb2242c843e" target="_blank">
               <Label>VET Balance: </Label>
-              <FormattedNumber value={Balances.format(balances.vet)} />
+              <FormattedNumber value={Balances.format(balances.VET)} />
               {' '}
               (<FormattedNumber
-                value={Balances.getPrice(balances.vet, tickers.vet)}
+                value={Balances.getPrice(balances.VET, tickers.VET)}
                 currency="USD" style="currency" />)
             </Link>
 

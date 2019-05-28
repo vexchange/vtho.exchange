@@ -1,7 +1,10 @@
-const initialState = {
-  vet: 0,
-  vtho: 0,
-};
+import tokens from '../tokens.json';
+
+const initialState = {};
+
+for (const key of tokens) {
+  initialState[key] = 0;
+}
 
 export default function balances(state = initialState, action) {
   const { type, payload } = action;
@@ -12,8 +15,8 @@ export default function balances(state = initialState, action) {
     case 'FETCH_BALANCES_FULFILLED':
       return { 
         ...state,
-        vet: payload[0],
-        vtho: payload[1],
+        VET: payload[0],
+        VTHO: payload[1],
       };
     default:
       return state;

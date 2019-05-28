@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 class Fees extends Component {
   render() {
 
-    const { vet, vtho, intl } = this.props;
+    const { VET, VTHO, intl } = this.props;
 
     return (
       <Card
@@ -48,28 +48,28 @@ class Fees extends Component {
           <div>
             <Label>{ intl.formatMessage({ id: 'fees.minimumVET' }) }</Label>
             <Fee>
-              { vet.deposit }
+              { VET.deposit }
               <Small> vet</Small>
             </Fee>
           </div>
           <div>
             <Label>VET Gas { intl.formatMessage({ id: 'fees.label' }) }</Label>
             <Fee>
-              { vet.gas }
+              { VET.gas }
               <Small> vet</Small>
             </Fee>
           </div>
           <div>
             <Label>{ intl.formatMessage({ id: 'fees.minimumVTHO' }) }</Label>
             <Fee>
-              { vtho.deposit }
+              { VTHO.deposit }
               <Small> vtho</Small>
             </Fee>
           </div>
           <div>
             <Label>VTHO Gas { intl.formatMessage({ id: 'fees.label' }) }</Label>
             <Fee>
-              { vtho.gas }
+              { VTHO.gas }
               <Small> vtho</Small>
             </Fee>
           </div>

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import { fetchBalances } from '../actions';
+import { fetchBalancesThunk } from '../actions';
 import Balances from '../components/Balances';
 
 const mapStateToProps = ({ balances, tickers }) => ({ balances, tickers });
 
-const BalancesContainer = connect(mapStateToProps, { onLoad: fetchBalances })(Balances);
+const BalancesContainer = connect(mapStateToProps, { onLoad: fetchBalancesThunk })(Balances);
 
 export default BalancesContainer;

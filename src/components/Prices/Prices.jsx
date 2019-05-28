@@ -54,12 +54,12 @@ class Prices extends Component {
 
   getVETPrice() {
     const { balances, tickers } = this.state;
-    return (((balances.vtho / balances.vet) * tickers.vtho) * 100 || 0);
+    return (((balances.VTHO / balances.VET) * tickers.vtho) * 100 || 0);
   }
 
   getVTHOPrice() {
     const { balances, tickers } = this.state;
-    return (((balances.vet / balances.vtho) * tickers.vet) * 100 || 0);
+    return (((balances.VET / balances.vtho) * tickers.VET) * 100 || 0);
   }
 
   render() {
@@ -98,7 +98,7 @@ class Prices extends Component {
                     <Label>VET { intl.formatMessage({ id: 'price' }) }</Label>
                   </div>
                   <Price>
-                    { Prices.conversion(tickers.vet, 100) }
+                    { Prices.conversion(tickers.VET, 100) }
                   </Price>
                 </Col>
                 <Col>

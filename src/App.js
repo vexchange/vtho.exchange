@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  BrowserRouter as Router,
+} from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import { Home } from './scenes';
 
-import Header from './components/Header';
 import Footer from './components/Footer';
 
 const GlobalStyle = createGlobalStyle`
+  a {
+    text-decoration: none;
+  }
+
   .ant-card-head-title {
     text-transform: uppercase;
   }
@@ -25,9 +33,10 @@ class App extends Component {
 
         <Layout>
 
-          <Header />
-
-          <Route path="/" exact component={Home} />
+          <Switch>
+            <Redirect from='/' exact to='/VTHO'/>
+            <Route path="/:token" component={Home} />
+          </Switch>
 
           <Footer />
 

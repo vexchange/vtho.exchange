@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from '../Container';
 import styled from 'styled-components';
 
 import LocaleChangerContainer from '../../containers/LocaleChangerContainer';
+import TokenSelectorContainer from '../../containers/TokenSelectorContainer';
 
 const Wrapper = styled.header`
   background: linear-gradient(35deg, #116366, #1bbc78);
@@ -28,16 +30,30 @@ const Title = styled.h1`
   }
 `;
 
+const Actions = styled.div`
+  align-items: center;
+  display: flex;
+
+  TokenSelectorContainer {
+    margin-right: 20px;
+  }
+`;
+
 const Header = () => {
   return (
     <Wrapper>
       <Container>
         <Content>
-          <Title>
-            Vexchange
-            <small>beta</small>
-          </Title>
-          <LocaleChangerContainer />
+          <Link to="/">
+            <Title>
+              Vexchange
+              <small>beta</small>
+            </Title>
+          </Link>
+          <Actions>
+            <TokenSelectorContainer />
+            <LocaleChangerContainer />
+          </Actions>
         </Content>
       </Container>
     </Wrapper>

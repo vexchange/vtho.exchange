@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 
-import QRCode from '../QRCode';
+import QRCodeContainer from '../../containers/QRCodeContainer';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -75,7 +75,7 @@ class Info extends Component {
 
         </Content>
 
-        <QRCode />
+        <QRCodeContainer />
 
       </Wrapper>
     );
