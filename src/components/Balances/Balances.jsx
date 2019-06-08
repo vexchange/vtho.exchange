@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FormattedNumber } from 'react-intl';
-import _ from 'lodash';
+import { isEqual, isEmpty } from 'lodash';
 
 import Container from '../../components/Container';
 
@@ -53,23 +53,23 @@ class Balances extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.onLoad();
-  }
+  componentWillReceiveProps({ tickers, balances, token }) {
+    if (!isEqual(this.props.token, token)) {
+      this.props.onLoad(token);
+    }
 
-  componentWillReceiveProps({ tickers, balances }) {
-    if (!_.isEmpty(tickers)) {
+    if (!isEmpty(tickers)) {
       this.setState({ tickers });
     }
 
-    if (!_.isEmpty(balances)) {
+    if (!isEmpty(balances)) {
       this.setState({ balances });
     }
   }
 
   render() {
     const { tickers, balances } = this.state;
-    const { token  } = this.props;
+    const { token } = this.props;
 
     return (
       <Wrapper>
@@ -87,10 +87,10 @@ class Balances extends Component {
             { (token && token.name) &&
               <Link href={`https://explore.veforge.com/accounts/${token.address}`} target="_blank">
                 <Label>{token.name} Balance: </Label>
-                <FormattedNumber value={Balances.format(balances.vtho)} />
+                <FormattedNumber value={Balances.format(balances[token.name])} />
                 {' '}
                 (<FormattedNumber
-                  value={Balances.getPrice(balances.vtho, tickers.vtho)}
+                  value={Balances.getPrice(balances[token.name], tickers[token.name])}
                   currency="USD" style="currency" />)
               </Link>
             }

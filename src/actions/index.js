@@ -1,14 +1,10 @@
 import Web3 from "web3";
 import { thorify } from 'thorify';
+import axios from 'axios';
 
 import ContractJson from "../build/contracts/exchange.json";
 
 const web3 = thorify(new Web3(), "http://127.0.0.1:8669/");
-
-cc.setApiKey(process.env.CRYPTOCOMPARE_API_KEY);
-
-const getVTHO = () => cc.price('VTHO', ['USD']);
-const getVET = () => cc.price('VET', ['USD']);
 
 export const setTokenAndAddress = token => {
   return (dispatch) => {
@@ -34,22 +30,32 @@ export const setContract = address => ({
   payload: new web3.eth.Contract(ContractJson.abi, address),
 });
 
-export const fetchBalancesThunk = () => {
+export const fetchBalancesThunk = token => {
   return (dispatch, getState) => {
-    const { exchangeAddress } = getState().token;
-    dispatch(fetchBalances(exchangeAddress))
+    dispatch(fetchBalances(token));
   }
 }
-export const fetchBalances = exchangeAddress => ({
-  type: 'FETCH_BALANCES',
-  payload: Promise.all([
-    web3.eth.getBalance(exchangeAddress),
-    web3.eth.getEnergy(exchangeAddress)])
+export const fetchBalances = token => ({
+  type: 'FETCH_BALANCES_FULFILLED',
+  payload: [
+    20000,
+    300000,
+  ],
+  meta: {
+    token,
+  }
 });
 
-export const fetchTickers = () => ({
+export const fetchTickers = token => ({
   type: 'FETCH_TICKERS',
-  payload: Promise.all([getVTHO(), getVET()]),
+  payload: axios.get('http://localhost:3001/data', {
+    params: {
+      markets: ['vetusdt', 'ocevet']
+    }
+  }),
+  meta: {
+    token
+  },
 });
 
 export const fetchFees = () => ({

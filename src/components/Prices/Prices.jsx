@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
-import _ from 'lodash';
+import { isEmpty, isEqual } from 'lodash';
 
 import CustomCard from '../CustomCard';
 
@@ -52,31 +52,35 @@ class Prices extends Component {
     };
 
     this.getVETPrice = this.getVETPrice.bind(this);
-    this.getVTHOPrice = this.getVTHOPrice.bind(this);
+    this.getTokenPrice = this.getTokenPrice.bind(this);
   }
 
-  componentDidMount() {
-    this.props.onLoad();
-  }
-
-  componentWillReceiveProps({ tickers, balances }) {
-    if (!_.isEmpty(tickers)) {
-      this.setState({ tickers });
+  componentWillReceiveProps(props) {
+    if (!isEqual(this.props.token, props.token) ) {
+      this.props.onLoad(props.token);
     }
 
-    if (!_.isEmpty(balances)) {
-      this.setState({ balances });
+    if (!isEqual(this.props.tickers, props.tickers)) {
+      this.setState({ tickers: props.tickers });
+    }
+
+    if (!isEqual(this.props.balances, props.balances)) {
+      this.setState({ balances: props.balances });
     }
   }
 
   getVETPrice() {
     const { balances, tickers } = this.state;
-    return (((balances.VTHO / balances.VET) * tickers.vtho) * 100 || 0);
+    const { token } = this.props;
+
+    return tickers.VET.ticker.last;
   }
 
-  getVTHOPrice() {
+  getTokenPrice() {
     const { balances, tickers } = this.state;
-    return (((balances.VET / balances.vtho) * tickers.VET) * 100 || 0);
+    const { token } = this.props;
+
+    return tickers[token.name].ticker.last;
   }
 
   render() {
@@ -93,16 +97,20 @@ class Prices extends Component {
                 <Col>
                   <Title>Vexchange { intl.formatMessage({ id: 'price' }) }</Title>
                   <Label>VET { intl.formatMessage({ id: 'price' }) }</Label>
-                  <Price>
-                    { Prices.format(this.getVETPrice()) }
-                  </Price>
+                  { (!isEmpty(tickers) && !isEmpty(token)) &&
+                    <Price>
+                      { this.getVETPrice() }
+                    </Price>
+                  }
                 </Col>
                 <Col>
                   <Title>Exchange { intl.formatMessage({ id: 'price' }) } </Title>
                   <Label>{ token.name } { intl.formatMessage({ id: 'price' }) }</Label>
-                  <Price>
-                    { Prices.format(this.getVTHOPrice()) }
-                  </Price>
+                  { (!isEmpty(tickers) && !isEmpty(token)) &&
+                    <Price>
+                      {  this.getTokenPrice() }
+                    </Price>
+                  }
                 </Col>
               </Row>
             </CustomCard>
@@ -118,7 +126,7 @@ class Prices extends Component {
                   <div>
                     <Label>VET { intl.formatMessage({ id: 'fees.label' }) }</Label>
                   </div>
-                  { (token && token.name) &&
+                  { (!isEmpty(tickers) && !isEmpty(token)) &&
                     <Fee>
                       { fees[token.name].vetTradeFee }
                       <small>vet</small>
@@ -129,7 +137,7 @@ class Prices extends Component {
                   <div>
                     <Label>{ token.name } { intl.formatMessage({ id: 'fees.label' }) }</Label>
                   </div>
-                  { (token && token.name) &&
+                  { (!isEmpty(tickers) && !isEmpty(token)) &&
                     <Fee>
                       { fees[token.name].tokenTradeFee }
                       <small>{ token.name }</small>
