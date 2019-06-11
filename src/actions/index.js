@@ -32,15 +32,18 @@ export const setContract = address => ({
 
 export const fetchBalancesThunk = token => {
   return (dispatch, getState) => {
+    const state = getState();
+    console.log(state);
+
     dispatch(fetchBalances(token));
   }
 }
 export const fetchBalances = token => ({
   type: 'FETCH_BALANCES_FULFILLED',
-  payload: [
-    20000,
-    300000,
-  ],
+  payload: Promise.all([
+    web3.eth.getBalance('0x012345403c589A51b02Ee27BD41339f6114aac6A'),
+    web3.eth.getEnergy('0x012345403c589A51b02Ee27BD41339f6114aac6A')
+  ]),
   meta: {
     token,
   }
@@ -48,10 +51,9 @@ export const fetchBalances = token => ({
 
 export const fetchTickers = token => ({
   type: 'FETCH_TICKERS',
-  payload: axios.get('http://localhost:3001/data', {
-    params: {
-      markets: ['vetusdt', 'ocevet']
-    }
+  payload: axios({
+    url: 'http://localhost:3001/data',
+    method: 'GET',
   }),
   meta: {
     token

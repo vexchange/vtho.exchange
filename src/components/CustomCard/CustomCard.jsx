@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   border-radius: 2px;
   color: #fff;
   font-weight: 500;
-  margin-bottom: 30px;
+  height: 100%;
 `;
 
 const Body = styled.div`

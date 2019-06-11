@@ -1,4 +1,5 @@
 const initialState = {
+  OCE: 0,
   DBET: 0,
   VTHO: 0,
   TIC: 0,

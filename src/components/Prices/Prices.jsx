@@ -10,6 +10,10 @@ const Label = styled.small`
   text-transform: uppercase;
 `;
 
+const Wrapper = styled.div`
+  margin-bottom: 30px;
+`;
+
 const Price = styled.div`
   color: #fff;
   font-size: 3em;
@@ -51,8 +55,8 @@ class Prices extends Component {
       balances: {},
     };
 
-    this.getVETPrice = this.getVETPrice.bind(this);
-    this.getTokenPrice = this.getTokenPrice.bind(this);
+    this.getVexchangePrice = this.getVexchangePrice.bind(this);
+    this.getExchangePrice = this.getExchangePrice.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -69,18 +73,20 @@ class Prices extends Component {
     }
   }
 
-  getVETPrice() {
+  getVexchangePrice() {
     const { balances, tickers } = this.state;
     const { token } = this.props;
+    const { ticker } = tickers[token.name];
 
-    return tickers.VET.ticker.last;
+    return (((balances[token.name] / balances.VET) * (ticker || {}).last) * 100 || 0);
   }
 
-  getTokenPrice() {
+  getExchangePrice() {
     const { balances, tickers } = this.state;
     const { token } = this.props;
+    const { ticker } = tickers[token.name];
 
-    return tickers[token.name].ticker.last;
+    return (ticker || {}).last;
   }
 
   render() {
@@ -88,27 +94,25 @@ class Prices extends Component {
     const { intl, token, fees } = this.props;
 
     return (
-      <div>
-        <Row gutter={30}>
+      <Wrapper>
+        <Row gutter={30} type="flex">
           <Col sm={24} md={12} lg={12} xl={12}>
 
             <CustomCard>
               <Row type="flex" justify="space-between" gutter={30}>
                 <Col>
                   <Title>Vexchange { intl.formatMessage({ id: 'price' }) }</Title>
-                  <Label>VET { intl.formatMessage({ id: 'price' }) }</Label>
                   { (!isEmpty(tickers) && !isEmpty(token)) &&
                     <Price>
-                      { this.getVETPrice() }
+                      { this.getVexchangePrice() }
                     </Price>
                   }
                 </Col>
                 <Col>
                   <Title>Exchange { intl.formatMessage({ id: 'price' }) } </Title>
-                  <Label>{ token.name } { intl.formatMessage({ id: 'price' }) }</Label>
                   { (!isEmpty(tickers) && !isEmpty(token)) &&
                     <Price>
-                      {  this.getTokenPrice() }
+                      {  this.getExchangePrice() }
                     </Price>
                   }
                 </Col>
@@ -123,9 +127,6 @@ class Prices extends Component {
 
               <Row type="flex" justify="space-between" gutter={30}>
                 <Col>
-                  <div>
-                    <Label>VET { intl.formatMessage({ id: 'fees.label' }) }</Label>
-                  </div>
                   { (!isEmpty(tickers) && !isEmpty(token)) &&
                     <Fee>
                       { fees[token.name].vetTradeFee }
@@ -134,9 +135,6 @@ class Prices extends Component {
                   }
                 </Col>
                 <Col>
-                  <div>
-                    <Label>{ token.name } { intl.formatMessage({ id: 'fees.label' }) }</Label>
-                  </div>
                   { (!isEmpty(tickers) && !isEmpty(token)) &&
                     <Fee>
                       { fees[token.name].tokenTradeFee }
@@ -149,7 +147,7 @@ class Prices extends Component {
 
           </Col>
         </Row>
-      </div>
+      </Wrapper>
     );
   }
 }
