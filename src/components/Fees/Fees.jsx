@@ -38,7 +38,6 @@ const Wrapper = styled.div`
 class Fees extends Component {
   render() {
     const { fees, intl } = this.props;
-    console.log(fees)
 
     return (
       <Card

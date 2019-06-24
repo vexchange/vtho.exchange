@@ -74,7 +74,7 @@ class Prices extends Component {
   }
 
   getVexchangePrice() {
-    const { balances, tickers } = this.state;
+    const { balances, tickers = {} } = this.state;
     const { token } = this.props;
     const { ticker } = tickers[token.name];
 
@@ -85,7 +85,7 @@ class Prices extends Component {
     const { balances, tickers } = this.state;
     const { token } = this.props;
     const { ticker } = tickers[token.name];
-
+    
     return (ticker || {}).last;
   }
 

@@ -15,7 +15,7 @@ export default function tickers(state = initialState, action) {
     case 'FETCH_TICKERS_PENDING':
       return { ...state, ...payload };
     case 'FETCH_TICKERS_FULFILLED':
-      const { data } = payload;
+      const { data: { data } } = payload;
       const { token } = meta;
 
       return { 

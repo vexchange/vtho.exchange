@@ -3,8 +3,9 @@ import { thorify } from 'thorify';
 import axios from 'axios';
 
 import ContractJson from "../build/contracts/exchange.json";
+import ERC20Abi from "../build/contracts/erc20.json";
 
-const web3 = thorify(new Web3(), "http://127.0.0.1:8669/");
+const web3 = thorify(new Web3(), "https://vechain-api.monti.finance");
 
 export const setTokenAndAddress = token => {
   return (dispatch) => {
@@ -15,8 +16,8 @@ export const setTokenAndAddress = token => {
 
 export const getAddress = () => {
   return (dispatch, getState) => {
-    const { exchangeAddress } = getState().token;
-    dispatch(setContract(exchangeAddress));
+    const { tokenAddress } = getState().token;
+    dispatch(setContract(tokenAddress));
   }
 }
 
@@ -32,17 +33,19 @@ export const setContract = address => ({
 
 export const fetchBalancesThunk = token => {
   return (dispatch, getState) => {
-    const state = getState();
-    console.log(state);
+    const contract = new web3.eth.Contract(ERC20Abi, token.tokenAddress);
+    const { balanceOf } = contract.methods;
+    const getBalance = balanceOf(token.exchangeAddress).call();
 
-    dispatch(fetchBalances(token));
+    dispatch(fetchBalances(token, getBalance));
   }
 }
-export const fetchBalances = token => ({
-  type: 'FETCH_BALANCES_FULFILLED',
+
+export const fetchBalances = (token, getBalance) => ({
+  type: 'FETCH_BALANCES',
   payload: Promise.all([
-    web3.eth.getBalance('0x012345403c589A51b02Ee27BD41339f6114aac6A'),
-    web3.eth.getEnergy('0x012345403c589A51b02Ee27BD41339f6114aac6A')
+    web3.eth.getBalance(token.address),
+    getBalance,
   ]),
   meta: {
     token,
@@ -52,8 +55,14 @@ export const fetchBalances = token => ({
 export const fetchTickers = token => ({
   type: 'FETCH_TICKERS',
   payload: axios({
-    url: 'http://localhost:3001/data',
+    url: 'http://localhost:3001/tickers_multi',
     method: 'GET',
+    params: {
+      markets: [
+        'vetusdt',
+        token.market
+      ]
+    }
   }),
   meta: {
     token
