@@ -2,6 +2,10 @@ const initialState = {
   VET: 0,
   VTHO: 0,
   OCE: 0,
+  PLA: 0,
+  TIC: 0,
+  SHA: 0,
+  DBET: 0,
 };
 
 export default function calculations(state = initialState, action) {

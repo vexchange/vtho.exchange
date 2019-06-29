@@ -81,7 +81,6 @@ export const calculateTokenThunk = (val, token) => {
     const num = web3.utils.toWei(val);
 
     getEthToTokenInputPrice(num).call().then(data => {
-      console.log(data);
       dispatch(calculateToken(data, token));
     });
   }

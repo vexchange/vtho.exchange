@@ -100,8 +100,6 @@ class Calculator extends Component {
     const { intl, token, calculations } = this.props;
     const { VET } = this.state;
 
-    console.log(calculations)
-
     return (
       <Card title={intl.formatMessage({ id: "calculator.label" })}>
         <Row gutter={30}>
