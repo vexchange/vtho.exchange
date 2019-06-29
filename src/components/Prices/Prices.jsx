@@ -6,10 +6,6 @@ import { isEmpty, isEqual } from 'lodash';
 
 import CustomCard from '../CustomCard';
 
-const Label = styled.small`
-  text-transform: uppercase;
-`;
-
 const Wrapper = styled.div`
   margin-bottom: 30px;
 `;
@@ -76,17 +72,17 @@ class Prices extends Component {
   getVexchangePrice() {
     const { balances, tickers = {} } = this.state;
     const { token } = this.props;
-    const { ticker } = tickers[token.name];
+    const { ticker = {} } = tickers[token.name];
 
-    return (((balances[token.name] / balances.VET) * (ticker || {}).last) * 100 || 0);
+    return (((balances[token.name] / balances.VET) * ticker.last) * tickers.VET.ticker.last).toFixed(6);
   }
 
   getExchangePrice() {
-    const { balances, tickers } = this.state;
+    const { tickers } = this.state;
     const { token } = this.props;
-    const { ticker } = tickers[token.name];
-    
-    return (ticker || {}).last;
+    const { ticker = {} } = tickers[token.name];
+
+    return (ticker.last * tickers.VET.ticker.last).toFixed(6);
   }
 
   render() {

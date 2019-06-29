@@ -7,14 +7,14 @@ const tokenMap = {
     market: 'vthovet',
   },
   OCE: {
-    exchangeAddress: '0xD293f479254D5F6494c66A4982C7cA514A53D7C4',
+    exchangeAddress: '0xDC391a5dbB89a3F768c41Cfa0e85dcaAF3A91f91',
     address: '0x114E1C8CA8f63B7C5692daFC8CFeB4112e9Ff7b4',
     tokenAddress: '0x0CE6661b4ba86a0EA7cA2Bd86a0De87b0B860F14',
     name: 'OCE',
     market: 'ocevet',
   },
   PLA: {
-    exchangeAddress: '0x18C2385481cDf28779aC271272398dD61cc8CF3E',
+    exchangeAddress: '0xD293f479254D5F6494c66A4982C7cA514A53D7C4',
     address: '0x84497d7E46F671092f3AC8455f0F7F30890Df5A1',
     tokenAddress: '0x89827F7bB951Fd8A56f8eF13C5bFEE38522F2E1F',
     name: 'PLA',
@@ -35,7 +35,7 @@ const tokenMap = {
     market: 'ticvet',
   },
   DBET: {
-    exchangeAddress: '0xDC391a5dbB89a3F768c41Cfa0e85dcaAF3A91f91',
+    exchangeAddress: '0x18C2385481cDf28779aC271272398dD61cc8CF3E',
     address: '0x71bE6131a9213b2e333766304B31F88ce3B8721f',
     tokenAddress: '0xa94A33f776073423E163088a5078feac31373990',
     name: 'DBET',

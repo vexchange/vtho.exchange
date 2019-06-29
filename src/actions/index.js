@@ -16,8 +16,8 @@ export const setTokenAndAddress = token => {
 
 export const getAddress = () => {
   return (dispatch, getState) => {
-    const { tokenAddress } = getState().token;
-    dispatch(setContract(tokenAddress));
+    const { exchangeAddress } = getState().token;
+    dispatch(setContract(exchangeAddress));
   }
 }
 
@@ -28,7 +28,7 @@ export const setToken = token => ({
 
 export const setContract = address => ({
   type: 'SET_CONTRACT',
-  payload: new web3.eth.Contract(ContractJson.abi, address),
+  payload: new web3.eth.Contract(ContractJson, address),
 });
 
 export const fetchBalancesThunk = token => {
@@ -44,7 +44,7 @@ export const fetchBalancesThunk = token => {
 export const fetchBalances = (token, getBalance) => ({
   type: 'FETCH_BALANCES',
   payload: Promise.all([
-    web3.eth.getBalance(token.address),
+    web3.eth.getBalance(token.exchangeAddress),
     getBalance,
   ]),
   meta: {
@@ -73,32 +73,46 @@ export const fetchFees = () => ({
   type: 'FETCH_FEES',
 });
 
-export const calculateVTHO = val => {
-  return (_, getState) => {
+export const calculateTokenThunk = (val, token) => {
+  return (dispatch, getState) => {
     const { contract } = getState();
-    const { getEthToTokenPrice } = contract.methods;
+    const { getEthToTokenInputPrice } = contract.methods;
+
     const num = web3.utils.toWei(val);
 
-    return {
-      type: 'CALCULATE_VTHO',
-      payload: getEthToTokenPrice(num).call(),
-      meta: { web3 },
-    }
+    getEthToTokenInputPrice(num).call().then(data => {
+      console.log(data);
+      dispatch(calculateToken(data, token));
+    });
   }
 };
 
-export const calculateVET = (val) => {
-  return (_, getState) => {
+export const calculateToken = (val, token) => {
+  return {
+    type: 'CALCULATE_TOKEN',
+    payload: val,
+    meta: { web3, token },
+  }
+};
+
+export const calculateVETThunk = (val, token) => {
+  return (dispatch, getState) => {
     const { contract } = getState();
-    const { getTokenToEthPrice } = contract.methods;
+    const { getTokenToEthInputPrice } = contract.methods;
     const num = web3.utils.toWei(val);
 
-    return {
-      type: 'CALCULATE_VET',
-      payload: getTokenToEthPrice(num).call(),
-      meta: { web3 },
-    };
+    getTokenToEthInputPrice(num).call().then(data => {
+      dispatch(calculateVET(data, token));
+    });
   }
+};
+
+export const calculateVET = val => {
+  return {
+    type: 'CALCULATE_VET',
+    payload: val,
+    meta: { web3 },
+  };
 };
 
 export const changeLanguage = (val) => {

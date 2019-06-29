@@ -54,10 +54,10 @@ class Calculator extends Component {
     };
 
     this.captureVET = this.captureVET.bind(this);
-    this.captureVTHO = this.captureVTHO.bind(this);
+    this.captureToken = this.captureToken.bind(this);
 
     this.sendVET = this.sendVET.bind(this);
-    this.sendVTHO = this.sendVTHO.bind(this);
+    this.sendToken = this.sendToken.bind(this);
   }
 
   componentWillReceiveProps({ vet, vtho }) {
@@ -72,31 +72,35 @@ class Calculator extends Component {
 
   captureVET(e) {
     const { value } = e.target;
+    const { token } = this.props;
 
-    this.sendVET(value);
+    this.sendVET(value, token);
   }
 
-  captureVTHO(e) {
+  captureToken(e) {
     const { value } = e.target;
+    const { token } = this.props;
 
-    this.sendVTHO(value);
+    this.sendToken(value, token);
   }
 
-  sendVET = _.debounce(value => {
+  sendVET = _.debounce((value, token) => {
     if (value && value > 0) {
-      this.props.calculateVTHO(value);
+      this.props.calculateTokenThunk(value, token);
     }
   }, 500);
 
-  sendVTHO = _.debounce(value => {
+  sendToken = _.debounce((value, token) => {
     if (value && value > 0) {
-      this.props.calculateVET(value);
+      this.props.calculateVETThunk(value, token);
     }
   }, 500);
 
   render() {
-    const { intl, token } = this.props;
-    const { VET, VTHO } = this.state;
+    const { intl, token, calculations } = this.props;
+    const { VET } = this.state;
+
+    console.log(calculations)
 
     return (
       <Card title={intl.formatMessage({ id: "calculator.label" })}>
@@ -111,7 +115,7 @@ class Calculator extends Component {
               onChange={this.captureVET} />
             <Amount>
               { (token && token.name) &&
-                <FormattedNumber value={this.state[token.name]} />
+                <FormattedNumber value={calculations[token.name]} />
               }
               <small>{ token.name }</small>
             </Amount>
@@ -122,9 +126,9 @@ class Calculator extends Component {
               size="large"
               placeholder="0"
               addonAfter={token.name}
-              onChange={this.captureVTHO} />
+              onChange={this.captureToken} />
             <Amount>
-              <FormattedNumber value={VET} />
+              <FormattedNumber value={calculations.VET} />
               <small>VET</small>
             </Amount>
           </Col>

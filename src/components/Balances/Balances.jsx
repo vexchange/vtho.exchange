@@ -39,9 +39,19 @@ const Label = styled.span`
 class Balances extends Component {
   static format = num => num / 1000000000000000000;
 
-  static getPrice = (num, price) => {
+  static getPrice = (num, tickers, mul) => {
     const format = Balances.format(num);
-    return format * price;
+    const { ticker } = tickers
+    let price;
+
+
+    if (mul) {
+      price = (format * ticker.last) * mul.ticker.last;
+    } else {
+      price = format * ticker.last;
+    }
+
+    return price;
   }
 
   constructor() {
@@ -75,22 +85,24 @@ class Balances extends Component {
       <Wrapper>
         <Container>
           <Links>
-            <Link href="https://explore.veforge.com/accounts/0x534BD48d7CfB0602EA3708cfdDacFeb2242c843e" target="_blank">
-              <Label>VET Balance: </Label>
-              <FormattedNumber value={Balances.format(balances.VET)} />
-              {' '}
-              (<FormattedNumber
-                value={Balances.getPrice(balances.VET, tickers.VET)}
-                currency="USD" style="currency" />)
-            </Link>
+            { (!isEmpty(tickers[token.name]) && !isEmpty(balances[token.name])) &&
+              <Link href={`https://explore.veforge.com/accounts/${token.exchangeAddress}`} target="_blank">
+                <Label>VET Balance: </Label>
+                <FormattedNumber value={Balances.format(balances.VET)} />
+                {' '}
+                (<FormattedNumber
+                  value={Balances.getPrice(balances.VET, tickers.VET)}
+                  currency="USD" style="currency" />)
+              </Link>
+            }
 
-            { (token && token.name) &&
-              <Link href={`https://explore.veforge.com/accounts/${token.address}`} target="_blank">
+            { (!isEmpty(tickers[token.name]) && !isEmpty(balances[token.name])) &&
+              <Link href={`https://explore.veforge.com/accounts/${token.exchangeAddress}`} target="_blank">
                 <Label>{token.name} Balance: </Label>
                 <FormattedNumber value={Balances.format(balances[token.name])} />
                 {' '}
                 (<FormattedNumber
-                  value={Balances.getPrice(balances[token.name], tickers[token.name])}
+                  value={Balances.getPrice(balances[token.name], tickers[token.name], tickers.VET)}
                   currency="USD" style="currency" />)
               </Link>
             }
