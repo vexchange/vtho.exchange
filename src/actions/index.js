@@ -55,7 +55,7 @@ export const fetchBalances = (token, getBalance) => ({
 export const fetchTickers = token => ({
   type: 'FETCH_TICKERS',
   payload: axios({
-    url: 'https://vechain-api.monti.finance:1337/tickers_multi',
+    url: 'https://vtho-exchange-api.herokuapp.com/tickers_multi',
     method: 'GET',
     params: {
       markets: [
