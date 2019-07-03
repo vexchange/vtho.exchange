@@ -15,6 +15,10 @@ const Content = styled.div`
   display: flex;
   padding: 24px 0;
   justify-content: space-between;
+
+  @media all and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.h1`
