@@ -30,14 +30,14 @@ const tokenMap = {
   TIC: {
     exchangeAddress: '0x992cd19c2F33d5F5569F17fF047063B3b0ff1adA',
     address: '0x39df9f3aE0FaAfeF6B12330930900707aca7fF1A',
-    tokenAddress: '0x5db3C8A942333f6468176a870dB36eEf120a34DC',
+    tokenAddress: '0xa94A33f776073423E163088a5078feac31373990',
     name: 'TIC',
     market: 'ticvet',
   },
   DBET: {
     exchangeAddress: '0x18C2385481cDf28779aC271272398dD61cc8CF3E',
     address: '0x71bE6131a9213b2e333766304B31F88ce3B8721f',
-    tokenAddress: '0xa94A33f776073423E163088a5078feac31373990',
+    tokenAddress: '0x1b8EC6C2A45ccA481Da6F243Df0d7A5744aFc1f8',
     name: 'DBET',
     market: 'dbetvet',
   }

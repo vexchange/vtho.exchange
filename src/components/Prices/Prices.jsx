@@ -8,6 +8,16 @@ import CustomCard from '../CustomCard';
 
 const Wrapper = styled.div`
   margin-bottom: 30px;
+
+  @media all and (max-width: 768px) {
+    > .row {
+      flex-direction: column;
+    }
+
+    .column:last-of-type {
+      margin-top: 20px;
+    }
+  }
 `;
 
 const Price = styled.div`
@@ -91,8 +101,8 @@ class Prices extends Component {
 
     return (
       <Wrapper>
-        <Row gutter={30} type="flex">
-          <Col sm={24} md={12} lg={12} xl={12}>
+        <Row gutter={30} type="flex" className="row">
+          <Col sm={24} md={12} lg={12} xl={12} className="column">
 
             <CustomCard>
               <Row type="flex" justify="space-between" gutter={30}>
@@ -116,7 +126,7 @@ class Prices extends Component {
             </CustomCard>
 
           </Col>
-          <Col sm={24} md={12} lg={12} xl={12}>
+          <Col sm={24} md={12} lg={12} xl={12} className="column">
 
             <CustomCard> 
               <Title>Gas { intl.formatMessage({ id: 'fees.label' }) }</Title>
