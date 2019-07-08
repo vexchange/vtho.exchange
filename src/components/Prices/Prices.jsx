@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
-import { isEmpty, isEqual } from 'lodash';
+import { isEmpty, isEqual, get } from 'lodash';
 
 import CustomCard from '../CustomCard';
 
@@ -26,9 +26,9 @@ const Price = styled.div`
   font-weight: 300;
   line-height: 1;
 
-  &::after {
-    content: '¢';
-    font-size: 2rem;
+  &:after {
+    content: 'vet';
+    font-size: 1rem;
   }
 `;
 
@@ -80,19 +80,17 @@ class Prices extends Component {
   }
 
   getVexchangePrice() {
-    const { balances, tickers = {} } = this.state;
+    const { balances } = this.state;
     const { token } = this.props;
-    const { ticker = {} } = tickers[token.name];
 
-    return (((balances[token.name] / balances.VET) * ticker.last) * tickers.VET.ticker.last).toFixed(6);
+    return (balances.VET / balances[token.name]).toFixed(4);
   }
 
   getExchangePrice() {
     const { tickers } = this.state;
     const { token } = this.props;
-    const { ticker = {} } = tickers[token.name];
 
-    return (ticker.last * tickers.VET.ticker.last).toFixed(6);
+    return get(tickers[token.name], 'ticker.last', 0);
   }
 
   render() {
