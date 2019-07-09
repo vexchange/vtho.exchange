@@ -29,6 +29,7 @@ const Price = styled.div`
   &:after {
     content: 'vet';
     font-size: 1rem;
+    text-transform: uppercase;
   }
 `;
 
@@ -39,7 +40,8 @@ const Fee = styled.div`
   line-height: 1;
 
   small {
-    font-size: 2rem;
+    font-size: 1rem;
+    text-transform: uppercase;
   }
 `;
 
@@ -100,7 +102,7 @@ class Prices extends Component {
     return (
       <Wrapper>
         <Row gutter={30} type="flex" className="row">
-          <Col sm={24} md={12} lg={12} xl={12} className="column">
+          <Col sm={24} md={14} lg={14} xl={14} className="column">
 
             <CustomCard>
               <Row type="flex" justify="space-between" gutter={30}>
@@ -124,7 +126,7 @@ class Prices extends Component {
             </CustomCard>
 
           </Col>
-          <Col sm={24} md={12} lg={12} xl={12} className="column">
+          <Col sm={24} md={10} lg={10} xl={10} className="column">
 
             <CustomCard> 
               <Title>Gas { intl.formatMessage({ id: 'fees.label' }) }</Title>
