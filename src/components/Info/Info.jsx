@@ -64,13 +64,12 @@ class Info extends Component {
                 { intl.formatMessage({ id: 'tips.2'}) }
               </small>
             </Item>
-            
+
             <Item>
               <small>
                 { intl.formatMessage({ id: 'tips.3'}) }
               </small>
             </Item>
-            
           </DottedList>
 
         </Content>

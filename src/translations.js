@@ -13,8 +13,8 @@ const translations = {
     "instructions.2": "Open the QR code scanner (top right corner) and scan the QR code to the right.",
     "instructions.3": "Enter the amount you would like to swap (must be higher than minimum) and complete the transaction.",
     "tips.1": "Save the exchange address to your contacts for convenient access and better security in the event the web interface gets compromised.",
-    "tips.2": "Recommended trade size is 100k VTHO / 12k VET or less",
-    "tips.3": "Due to a display issue with the mobile wallet, VTHO to VET trades will not properly display received VET"
+    "tips.2": "Price changes with trade size, keep your trades below %3 of the staked assets you see in the top bar",
+    "tips.3": "Do not send funds directly from an exchange",
   },
   zh: {
     "clickToCopy": "点击复制",
@@ -31,8 +31,8 @@ const translations = {
     "instructions.2": "在右上⻆，打开⼆维码扫码器。扫⼀扫VEXCHANGE的⼆维码。",
     "instructions.3": "输⼊您想要交易的金额(必须超过最低限额)并完成交易。",
     "tips.1": "如需为下⼀次交易提供⽅便，可保存交易地址到移动钱包的联系⼈。",
-    "tips.2": "建议保持⼀次交易量不超过100,000VTHO或12,000VET。",
-    "tips.3": "由于移动钱包的问题，在VTHO>VET的交易过程中获取的VET信息暂不能完整显示。"
+    "tips.2": "Price changes with trade size, keep your trades below %3 of the staked assets you see in the top bar",
+    "tips.3": "Do not send funds directly from an exchange",
   }
 };
 
