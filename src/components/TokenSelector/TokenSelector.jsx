@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { Select } from '@rebass/forms';
 
 function TokenSelector({ tokens, onTokenSelect, selectedToken }) {
@@ -12,7 +12,7 @@ function TokenSelector({ tokens, onTokenSelect, selectedToken }) {
       name='token'
       onChange={handleTokenSelect}
       defaultValue={selectedToken.symbol}>
-      { Object.entries(tokens).map(([name, address]) => (
+      { Object.entries(tokens).map(([name]) => (
         <option
           value={name}
           key={name}
