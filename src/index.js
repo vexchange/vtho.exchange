@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import 'normalize.css';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import { ThemeProvider } from 'emotion-theming';
+import WebFont from 'webfontloader';
+import theme from './theme';
+
+import ContractContext from './contexts/Contract';
+
+WebFont.load({
+  google: {
+    families: ['Rubik:500', 'Raleway:400,700', 'Roboto Mono']
+  }
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <ContractContext>
+        <App />
+      </ContractContext>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
