@@ -52,7 +52,6 @@ function Token() {
   const history = useHistory();
   const ref = useRef(null);
   const [token, setToken] = useState(tokens[params.token.toUpperCase()]);
-  const [val, setVal] = useState('0');
 
   const onTokenSelect = selectedToken => {
     history.push(selectedToken.symbol)
@@ -69,7 +68,7 @@ function Token() {
   }, []);
 
   useEffect(() => {
-    QRCode.toCanvas(ref.current, token.address, {
+    QRCode.toCanvas(ref.current, tokens[params.token.toUpperCase()].address, {
       width: 200,
       margin: 0,
       color: {
