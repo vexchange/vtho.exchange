@@ -117,8 +117,17 @@ function Token() {
           <Canvas
             ref={ref}
             data-clipboard-text={token.address} />
-          <p>click to copy</p>
+          <small>click to copy</small>
         </CanvasWrapper>
+        <Text
+          sx={{
+            textAlign: 'center',
+            fontWeight: 'bold',
+            marginBottom: '40px',
+            marginTop: '20px',
+          }}>
+          { tokens[params.token.toUpperCase()].address }
+        </Text>
       </Box>
       <Steps />
       {/* <Prices token={token} /> */}
