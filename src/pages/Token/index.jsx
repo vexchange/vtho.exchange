@@ -125,6 +125,7 @@ function Token() {
             fontWeight: 'bold',
             marginBottom: '40px',
             marginTop: '20px',
+            wordBreak: 'break-all',
           }}>
           { tokens[params.token.toUpperCase()].address }
         </Text>
