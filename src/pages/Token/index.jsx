@@ -138,7 +138,9 @@ function Token() {
         <NoConnex />
       )}
       <Text sx={{ marginTop: '40px' }}>
-        <small>Got any issues? Contact @Raleigh_CA on Twitter, Telegram, or email ken.u.diggitt@gmail.com</small>
+        <small>
+          Got any issues? Join our <a href="https://t.me/vexchange" target="_blank">Telegram</a>
+        </small>
       </Text>
     </div>
   );
