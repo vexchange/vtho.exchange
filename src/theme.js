@@ -5,19 +5,20 @@ export default {
     12, 14, 16, 20, 24, 32, 48, 64
   ],
   colors: {
-    background: '#FFFFFF',
-    green: '#468685',
+    background: '#FEF2E0',
+    red: '#E34435',
     black: '#333639',
     blue: '#07c',
-    lightgray: '#f6f6ff'
+    lightgray: '#f6f6ff',
+    primary: '#E34435',
+    white: '#FFFFFF'
   },
   space: [
     0, 4, 8, 16, 32, 64, 128, 256
   ],
   fonts: {
-    body: 'Raleway, sans-serif',
-    heading: 'Rubik, sans-serif',
-    monospace: 'Roboto Mono, monospace',
+    body: 'Poppins, sans-serif',
+    heading: 'Rubik Mono One, sans-serif',
   },
   fontWeights: {
     body: 400,

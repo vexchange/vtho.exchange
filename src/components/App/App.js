@@ -5,8 +5,8 @@ import {
   Redirect,
   BrowserRouter as Router,
 } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import { Box } from 'rebass';
-import styled from '@emotion/styled';
 import { Global, css } from '@emotion/core';
 import Token from '../../pages/Token';
 
@@ -18,29 +18,27 @@ const styles = props => css`
   }
 
   body {
-    background: ${props.colors.background};
+    background: #FEF2E0;
     font-family: ${props.fonts.body};
     font-size: 14px;
+    line-height: 21px;
   }
 
   a {
-    color: ${props.colors.green};
+    color: ${props.colors.primary};
     text-decoration: none;
+    font-weight: 700;
   }
   
   ol, ul {
     list-style-position:inside;
     padding: 0;
+    margin: 0;
   }
 
-  li {
+  ol li {
     margin-bottom: 10px;
   }
-`;
-
-const Spacer = styled.div`
-  height: 200px;
-  width: 100%;
 `;
 
 function App() {
@@ -48,8 +46,9 @@ function App() {
     <Box
       sx={{
         height: '100%',
-        maxWidth: 630,
+        maxWidth: 441,
         mx: 'auto',
+        pt: isMobile ? 50 : 150,
         px: 3,
       }}
     >
@@ -59,7 +58,6 @@ function App() {
           <Redirect from='/' exact to='/VTHO'/>
         </Switch>
       </Router>
-      <Spacer />
       <Global styles={styles} />
     </Box>
   );

@@ -4,14 +4,12 @@ import styled from '@emotion/styled';
 import ClipboardJS from 'clipboard';
 import { useTheme } from 'emotion-theming';
 import QRCode from 'qrcode';
+import { isMobile } from "react-device-detect";
 import { useParams, useHistory } from "react-router-dom";
 
 import tokens from '../../constants/tokens.json';
 
 import TokenSelector from '../../components/TokenSelector';
-import Steps from '../../components/Steps';
-import Calculator from '../../components/Calculator';
-import NoConnex from '../../components/NoConnex';
 
 const Canvas = styled.canvas`
   cursor: pointer;
@@ -24,15 +22,30 @@ const Canvas = styled.canvas`
 `;
 
 const Title = styled.h2`
-  color: ${props => props.theme.colors.green};
+  color: ${props => props.theme.colors.background};
+  background-color: ${props => props.theme.colors.primary};
   font-family: ${props => props.theme.fonts.heading};
   text-align: center;
+  height: 300px;
+  font-size: 3rem;
+  margin: 0;
+  margin-left: 20px;
 
-  span {
-    color: ${props => props.theme.colors.black};
-    font-family: ${props => props.theme.fonts.body};
-    font-size: 1.2rem;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  padding: 0 34px;
+  position: relative;
+
+  &::after {
+    content: "exchange";
+    font-size: 0.7rem;
+    left: 7px;
+    bottom: 0;
+    writing-mode: horizontal-tb;
+    text-orientation: sideways;
+    position: absolute;
   }
+
 `;
 
 const CanvasWrapper = styled.div`
@@ -40,10 +53,6 @@ const CanvasWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto;
-
-  p {
-  }
 `;
 
 function Token() {
@@ -69,79 +78,88 @@ function Token() {
 
   useEffect(() => {
     QRCode.toCanvas(ref.current, tokens[params.token.toUpperCase()].address, {
-      width: 200,
+      width: isMobile ? 250 : 300,
       margin: 0,
       color: {
-        dark: theme.colors.black,
+        dark: theme.colors.primary,
         light: theme.colors.background,
       }
     });
 
     setToken(tokens[params.token.toUpperCase()]);
-  }, [ params ]);
+  }, [ params, theme.colors ]);
 
   return (
     <div>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{
-          marginBottom: '40px',
-        }}
-      >
-        <Box>
-          <Title>
-            { token.symbol }
-            <span>.exchange</span>
-          </Title>
-        </Box>
-        <Box
-          width="150px"
-        >
-          <TokenSelector
-            onTokenSelect={onTokenSelect}
-            selectedToken={token}
-            tokens={tokens}
-          />
-        </Box>
-      </Flex>
-      
       <Box
         sx={{
-          mx: 'auto',
-          px: 3,
           marginBottom: '20px'
         }}
       >
-        <CanvasWrapper>
-          <Canvas
-            ref={ref}
-            data-clipboard-text={token.address} />
-          <small>click to copy</small>
-        </CanvasWrapper>
-        <Text
+        <Box
           sx={{
-            textAlign: 'center',
+            display: 'inline-block'
+
+          }}
+        >
+        </Box>
+        <Flex
+          alignItems="center"
+          flexDirection={isMobile ? 'column' : 'row'}
+        >
+          <CanvasWrapper>
+            <Canvas
+              ref={ref}
+              data-clipboard-text={token.address} />
+          </CanvasWrapper>
+          {!isMobile ? <Title>{ token.symbol }</Title> : null }
+        </Flex>
+        
+        <Text
+          isMobile={isMobile}
+          sx={{
             fontWeight: 'bold',
-            marginBottom: '40px',
-            marginTop: '20px',
+            fontSize: '0.85rem',
+            margin: '20px 0',
             wordBreak: 'break-all',
+            letterSpacing: '0.09rem',
+            color: theme.colors.primary
           }}>
           { tokens[params.token.toUpperCase()].address }
         </Text>
       </Box>
-      <Steps />
-      {/* <Prices token={token} /> */}
-      {window.connex ? (
-        <Calculator token={token} />
-      ) : (
-        <NoConnex />
-      )}
-      <Text sx={{ marginTop: '40px' }}>
-        <small>
-          Got any issues? Join our <a href="https://t.me/vexchange" target="_blank">Telegram</a>
-        </small>
-      </Text>
+      <Flex mx={-2}>
+        <Box width={2/12} px={2}>
+        <TokenSelector
+          onTokenSelect={onTokenSelect}
+          selectedToken={token}
+          tokens={tokens}
+        />
+        </Box>
+        <Box width={10/12} px={2}>
+          <ol>
+            <li>Select VET or any VIP180 token in your VeChain mobile wallet and press transfer.</li>
+            <li>Open the QR code scanner (top right corner) and scan the QR code to the right.</li>
+            <li>Enter the amount you would like to swap (must be higher than minimum) and complete the transaction.</li>
+          </ol>
+          <ul>
+            <li>
+              <small>Save the exchange address to your contacts for convenient access and better security in the event the web interface gets compromised.</small>
+            </li>
+            <li>
+              <small>Price changes with trade size, keep your trades below %3 of the staked assets you see in the top bar.</small>
+            </li>
+            <li>
+              <small>Do not send funds directly from an exchange.</small>
+            </li>
+          </ul>
+          <Text sx={{ marginTop: '30px' }}>
+            <small>
+              Got any issues? Join our <a href="https://t.me/vexchange" target="_blank" rel="noopener noreferrer">Telegram</a>
+            </small>
+          </Text>
+        </Box>
+      </Flex>
     </div>
   );
 }

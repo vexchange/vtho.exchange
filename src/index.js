@@ -11,7 +11,11 @@ import ContractContext from './contexts/Contract';
 
 WebFont.load({
   google: {
-    families: ['Rubik:500', 'Raleway:400,700', 'Roboto Mono']
+    families: [
+      'Rubik Mono One',
+      'Poppins:400,700',
+      'Source Code Pro:700'
+    ]
   }
 });
 
