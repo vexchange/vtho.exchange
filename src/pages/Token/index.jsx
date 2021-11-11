@@ -155,7 +155,7 @@ function Token() {
           </ul>
           <Text sx={{ marginTop: '30px' }}>
             <small>
-              Got any issues? Join our <a href="https://t.me/vexchange" target="_blank" rel="noopener noreferrer">Telegram</a>
+              Got any issues? Join our <a href="https://discord.gg/bzvUNqTENp" target="_blank" rel="noopener noreferrer">Discord</a>
             </small>
           </Text>
         </Box>
