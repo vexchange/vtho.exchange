@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
-import App from './components/App';
+import App from './pages/';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'emotion-theming';
 import WebFont from 'webfontloader';
 import theme from './theme';
 
 import ContractContext from './contexts/Contract';
+
+import './fonts.css';
 
 WebFont.load({
   google: {

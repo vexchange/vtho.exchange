@@ -5,12 +5,12 @@ export default {
     12, 14, 16, 20, 24, 32, 48, 64
   ],
   colors: {
-    background: '#FEF2E0',
+    background: '#121218',
     red: '#E34435',
     black: '#333639',
     blue: '#07c',
     lightgray: '#f6f6ff',
-    primary: '#E34435',
+    primary: '#f5a788',
     white: '#FFFFFF'
   },
   space: [
