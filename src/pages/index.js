@@ -204,7 +204,7 @@ function Home() {
               <small>Save the exchange address to your contacts for convenient access and better security in the event the web interface gets compromised.</small>
             </li>
             <li>
-              <small>Price changes with trade size, keep your trades below %3 of the staked assets you see on <a href="https://info.vexchange.io" target="_blank" rel="noopener noreferrer">info.vexchange.io</a>.</small>
+              <small>Price changes with trade size, keep your trades below 1% of the staked assets you see on <a href="https://info.vexchange.io" target="_blank" rel="noopener noreferrer">info.vexchange.io</a>.</small>
             </li>
             <li>
               <small>Do not send funds directly from an exchange.</small>
