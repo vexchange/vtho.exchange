@@ -151,17 +151,15 @@ function Home() {
       <SiteTitle>
         vtho.exchange
       </SiteTitle>
+      <SiteTitle>
+        vtho.exchange is currently experiencing problems. We are working to resolve this issues immediately.
+      </SiteTitle>
       <Box
         sx={{
           marginBottom: '20px'
         }}
       >
-        <Box
-          sx={{
-            display: 'inline-block'
-
-          }}
-        >
+        <Box>
           <TokenSelector
             alignItems="center"
             flexDirection={isMobile ? 'column' : 'row'}
